@@ -1,0 +1,9 @@
+node_modules
+/build
+/uploads
+npm-debug.log
+.DS_Store
+.idea
+config/secrets.*
+*.js
+*.js.map
