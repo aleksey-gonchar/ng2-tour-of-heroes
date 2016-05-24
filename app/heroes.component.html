@@ -5,8 +5,19 @@
       [class.selected]="hero === selectedHero"
   >
     <span class="badge">{{hero.id}}</span> {{hero.name}}
+    <button class="delete-button" (click)="deleteHero(hero, $event)"
+      style="float: right;"
+    >
+      Delete
+    </button>
   </li>
 </ul>
+
+<button (click)="addHero()">Add new hero</button>
+<div *ngIf="addingHero">
+  <my-hero-detail (close)="close($event)"></my-hero-detail>
+</div>
+
 <div *ngIf="selectedHero">
   <h2>{{selectedHero.name | uppercase}} is my hero!</h2>
   <button (click)="gotoDetail()">View details</button>
