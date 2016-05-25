@@ -2,10 +2,10 @@
 import { OnInit, Component } from '@angular/core'
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated'
 
-import { HeroService } from './hero.service'
-import { HeroesComponent } from './heroes.component'
-import { DashboardComponent } from './dashboard.component'
-import { HeroDetailComponent } from "./hero-detail.component";
+import { HeroService } from '../../services/hero.service'
+import { HeroesComponent } from '../heroes/heroes'
+import { DashboardComponent } from '../dashboard/dashboard'
+import { HeroDetailComponent } from '../hero-detail/hero-detail';
 
 @RouteConfig([
   {
@@ -26,9 +26,10 @@ import { HeroDetailComponent } from "./hero-detail.component";
   }
 ])
 @Component({
+  moduleId: module.id,
   selector: 'my-app',
-  templateUrl: 'app/app.component.html',
-  styleUrls: ['app/app.component.css'],
+  templateUrl: 'app.html',
+  styleUrls: ['app.css'],
   directives: [
     ROUTER_DIRECTIVES
   ],
