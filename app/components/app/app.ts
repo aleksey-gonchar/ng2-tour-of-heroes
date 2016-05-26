@@ -1,11 +1,12 @@
 'use strict'
-import { OnInit, Component } from '@angular/core'
+import { OnInit, AfterViewChecked, Component } from '@angular/core'
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated'
 
 import { HeroService } from '../../services/hero.service'
 import { HeroesComponent } from '../heroes/heroes'
 import { DashboardComponent } from '../dashboard/dashboard'
-import { HeroDetailComponent } from '../hero-detail/hero-detail';
+import { HeroDetailComponent } from '../hero-detail/hero-detail'
+import { HeroActions } from '../../actions/hero.actions'
 
 @RouteConfig([
   {
@@ -35,8 +36,22 @@ import { HeroDetailComponent } from '../hero-detail/hero-detail';
   ],
   providers: [
     ROUTER_PROVIDERS,
-    HeroService ]
+    HeroService,
+    HeroActions
+  ]
 })
-export class AppComponent extends Component {
+export class AppComponent implements OnInit {
   title = 'Tour of Heroes'
+
+  constructor (
+    private heroActions: HeroActions,
+    private heroService: HeroService
+  ) {
+    console.log('App.constructor()')
+  }
+
+  ngOnInit () {
+    console.log('App.ngOnInit()')
+    this.heroActions.loadAll()
+  }
 }

@@ -21,18 +21,21 @@ export class HeroDetailComponent implements OnInit {
   constructor (
     private heroService: HeroService,
     private routeParams: RouteParams
-  ) {}
+  ) {
+    console.log('HeroDetailComponent.constructor()')
+  }
 
   ngOnInit () {
-    if (this.routeParams.get('id') !== null) {
-      this.navigated = true
-      const id = +this.routeParams.get('id')
-      this.heroService.getHero(id)
-        .then(hero => this.hero = hero)
-    } else {
-      this.navigated = false
-      this.hero = new Hero()
-    }
+    console.log('HeroDetailComponent.ngOnInit()')
+    // if (this.routeParams.get('id') !== null) {
+    //   this.navigated = true
+    //   const id = +this.routeParams.get('id')
+    //   this.heroService.getHero(id)
+    //     .then(hero => this.hero = hero)
+    // } else {
+    //   this.navigated = false
+    //   this.hero = new Hero()
+    // }
   }
 
   save () {

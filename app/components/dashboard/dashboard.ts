@@ -1,6 +1,7 @@
 'use strict'
 import { OnInit, Component } from '@angular/core'
 import { Router } from '@angular/router-deprecated'
+import { Observer, Observable } from 'rxjs'
 
 import { Hero } from '../../models/hero'
 import { HeroService } from '../../services/hero.service'
@@ -12,16 +13,20 @@ import { HeroService } from '../../services/hero.service'
   styleUrls: ['dashboard.css']
 })
 export class DashboardComponent implements OnInit{
-  heroes: Hero[] = []
+  heroes$: Observable<Hero[]>
 
   constructor(
     private router: Router,
     private heroService: HeroService
-  ) {}
+  ) {
+    console.log('DashboardComponent.constructor()')
+    // this.heroes$ = this.heroService.heroes$.take(5)
+  }
 
   ngOnInit () {
-    this.heroService.getHeroes()
-      .then(heroes => this.heroes = heroes.slice(1,5))
+    console.log('DashboardComponent.ngOnInit()')
+  //   this.heroService.getHeroes()
+  //     .then(heroes => this.heroes = heroes.slice(1,5))
   }
 
   gotoDetail (hero: Hero) {
