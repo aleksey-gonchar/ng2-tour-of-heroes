@@ -1,10 +1,11 @@
 'use strict'
 import { OnInit, Component } from '@angular/core'
 import { Router } from '@angular/router-deprecated'
-import { Observer, Observable } from 'rxjs'
+import { Observer, Observable, Subject } from 'rxjs'
 
 import { Hero } from '../../models/hero'
 import { HeroService } from '../../services/hero.service'
+import { HeroActions } from '../../actions/hero.actions'
 
 @Component({
   moduleId: module.id,
@@ -13,19 +14,24 @@ import { HeroService } from '../../services/hero.service'
   styleUrls: ['dashboard.css']
 })
 export class DashboardComponent implements OnInit{
-  heroes$: Observable<Hero[]>
+  heroes$: Observable<Hero[]> = new Subject()
 
   constructor(
     private router: Router,
-    private heroService: HeroService
+    private heroService: HeroService,
+    private heroActions: HeroActions
   ) {
     console.log('DashboardComponent.constructor()')
-    // this.heroes$ = this.heroService.heroes$.take(5)
+    this.heroService.heroes$.subscribe(payload => {
+      this.heroes$.next(payload.slice(1,5))
+    })
+    // this.heroes$.subscribe()
+    heroActions.loadAll()
   }
 
   ngOnInit () {
     console.log('DashboardComponent.ngOnInit()')
-  //   this.heroService.getHeroes()
+    // this.heroService.getHeroes()
   //     .then(heroes => this.heroes = heroes.slice(1,5))
   }
 

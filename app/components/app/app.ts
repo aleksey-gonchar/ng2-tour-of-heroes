@@ -52,6 +52,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit () {
     console.log('App.ngOnInit()')
-    this.heroActions.loadAll()
+    // this.heroActions.loadAll()
   }
 }

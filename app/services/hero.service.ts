@@ -1,5 +1,5 @@
 'use strict'
-import { Injectable, OnInit } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { Http, Headers } from '@angular/http'
 import 'rxjs/add/operator/share'
 import { Observable, Observer } from 'rxjs'
@@ -8,7 +8,7 @@ import { Hero } from '../models/hero'
 import { HeroActions } from '../actions/hero.actions'
 
 @Injectable()
-export class HeroService implements OnInit {
+export class HeroService {
   private heroesUrl = 'app/heroes'
 
   heroes$: Observable<Hero[]>
@@ -22,20 +22,14 @@ export class HeroService implements OnInit {
     private heroActions: HeroActions
   ) {
     console.log('HeroService.constructor()')
-    this.heroes$ = Observable.create(observer => {
+    this.heroes$ = new Observable (observer => {
       this.observer$ = observer
+    // })
     }).share()
-    this.heroActions.loadAll$.subscribe(() => {
-      this.getHeroes()
-    })
-  }
 
-  ngOnInit () {
-    console.log('HeroService.ngOnInit()')
     this.heroActions.loadAll$.subscribe(() => {
       this.getHeroes()
     })
-    this.getHeroes()
   }
 
   getHero (id: number) {
@@ -57,7 +51,7 @@ export class HeroService implements OnInit {
         self.store = Object.assign({}, {
           heroes: payload
         })
-        // self.observer$.next(payload)
+        self.observer$.next(payload)
       })
   }
 
