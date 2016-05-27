@@ -24,7 +24,6 @@ export class HeroService {
     console.log('HeroService.constructor()')
     this.heroes$ = new Observable (observer => {
       this.observer$ = observer
-    // })
     }).share()
 
     this.heroActions.loadAll$.subscribe(() => {
@@ -51,7 +50,9 @@ export class HeroService {
         self.store = Object.assign({}, {
           heroes: payload
         })
-        self.observer$.next(payload)
+        payload.forEach(item => {
+          self.observer$.next(item)
+        })
       })
   }
 

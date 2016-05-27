@@ -40,7 +40,7 @@ import { HeroActions } from '../../actions/hero.actions'
     HeroActions
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Tour of Heroes'
 
   constructor (
@@ -48,10 +48,5 @@ export class AppComponent implements OnInit {
     private heroService: HeroService
   ) {
     console.log('App.constructor()')
-  }
-
-  ngOnInit () {
-    console.log('App.ngOnInit()')
-    // this.heroActions.loadAll()
   }
 }

@@ -22,10 +22,11 @@ export class DashboardComponent implements OnInit{
     private heroActions: HeroActions
   ) {
     console.log('DashboardComponent.constructor()')
-    this.heroService.heroes$.subscribe(payload => {
-      this.heroes$.next(payload.slice(1,5))
+    this.heroService.heroes$.take(3).subscribe(payload => {
+      // this.heroes$.next(payload.slice(1,5))
+      console.dir(payload)
+      this.heroes$.next(payload)
     })
-    // this.heroes$.subscribe()
     heroActions.loadAll()
   }
 
