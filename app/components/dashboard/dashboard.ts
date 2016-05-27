@@ -2,10 +2,13 @@
 import { OnInit, Component } from '@angular/core'
 import { Router } from '@angular/router-deprecated'
 import { Observer, Observable, Subject } from 'rxjs'
+import { Store } from '@ngrx/store'
 
-import { Hero } from '../../models/hero'
-import { HeroService } from '../../services/hero.service'
+
+import { Hero } from '../../interfaces'
+// import { HeroService } from '../../services/hero.service'
 import { HeroActions } from '../../actions/hero.actions'
+import { HeroesState } from '../../reducers/heroes.reducer'
 
 @Component({
   moduleId: module.id,
@@ -14,20 +17,22 @@ import { HeroActions } from '../../actions/hero.actions'
   styleUrls: ['dashboard.css']
 })
 export class DashboardComponent implements OnInit{
-  heroes$: Observable<Hero[]> = new Subject()
+  heroes$: Observable<Hero[]>
 
   constructor(
     private router: Router,
-    private heroService: HeroService,
-    private heroActions: HeroActions
+    // private heroService: HeroService,
+    private heroActions: HeroActions,
+    public store: Store<HeroesState>
   ) {
     console.log('DashboardComponent.constructor()')
-    this.heroService.heroes$.take(3).subscribe(payload => {
+    // this.heroService.heroes$.take(3).subscribe(payload => {
       // this.heroes$.next(payload.slice(1,5))
-      console.dir(payload)
-      this.heroes$.next(payload)
-    })
-    heroActions.loadAll()
+      // console.dir(payload)
+      // this.heroes$.next(payload)
+    // })
+    // heroActions.loadAll()
+    this.heroes$ = this.store.select('heroes')
   }
 
   ngOnInit () {

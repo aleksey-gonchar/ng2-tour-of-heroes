@@ -4,7 +4,7 @@ import { Http, Headers } from '@angular/http'
 import 'rxjs/add/operator/share'
 import { Observable, Observer } from 'rxjs'
 
-import { Hero } from '../models/hero'
+import { Hero } from '../interfaces'
 import { HeroActions } from '../actions/hero.actions'
 
 @Injectable()

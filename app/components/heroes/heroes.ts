@@ -2,7 +2,7 @@
 import { OnInit, Component } from '@angular/core'
 import { Router } from '@angular/router-deprecated'
 
-import { Hero } from '../../models/hero'
+import { Hero } from '../../interfaces'
 import { HeroDetailComponent } from '../hero-detail/hero-detail'
 import { HeroService } from '../../services/hero.service'
 
