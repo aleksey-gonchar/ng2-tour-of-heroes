@@ -1,30 +1,59 @@
 'use strict'
 import { Injectable } from '@angular/core'
 import { Http, Headers } from '@angular/http'
-import 'rxjs/add/operator/toPromise'
+import 'rxjs/add/operator/share'
+import { Observable, Observer } from 'rxjs'
 
 import { Hero } from '../models/hero'
+import { HeroActions } from '../actions/hero.actions'
 
 @Injectable()
 export class HeroService {
   private heroesUrl = 'app/heroes'
 
-  constructor (
-    private http: Http
-  ) {}
+  heroes$: Observable<Hero[]>
+  private observer$: Observer<Hero[]>
+  private store: {
+    heroes: Hero[]
+  } = null
 
-  getHero (id: number): Promise<Hero> {
-    return this.getHeroes()
-      .then(heroes => heroes.filter(hero => hero.id === id)[0])
+  constructor (
+    private http: Http,
+    private heroActions: HeroActions
+  ) {
+    console.log('HeroService.constructor()')
+    this.heroes$ = new Observable (observer => {
+      this.observer$ = observer
+    }).share()
+
+    this.heroActions.loadAll$.subscribe(() => {
+      this.getHeroes()
+    })
   }
 
-  getHeroes (): Promise<Hero[]> {
+  getHero (id: number) {
     return this.http.get(this.heroesUrl)
-      .toPromise()
-      .then(response => {
+      .map(response => {
         return response.json().data
       })
-      .catch(this.handleError)
+      .filter(hero => hero.id === id)
+      .take(1)
+  }
+
+  getHeroes () {
+    let self = this
+    this.http.get(this.heroesUrl)
+      .map(response => {
+        return response.json().data
+      })
+      .subscribe(payload => {
+        self.store = Object.assign({}, {
+          heroes: payload
+        })
+        payload.forEach(item => {
+          self.observer$.next(item)
+        })
+      })
   }
 
   handleError (err: any) {
