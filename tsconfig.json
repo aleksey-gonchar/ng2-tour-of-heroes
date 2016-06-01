@@ -2,13 +2,13 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": false,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "noEmitHelpers": true
   },
   "exclude": [
     "node_modules",
@@ -21,7 +21,5 @@
     "!./node_modules/**",
     "./src/custom-typings.d.ts",
     "./typings/index.d.ts"
-  ],
-  "compileOnSave": false,
-  "buildOnSave": false
+  ]
 }

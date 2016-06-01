@@ -1,21 +1,55 @@
 {
-  "name": "angular2-tour-of-heroes",
+  "name": "ng2-tour-of-heroes",
   "version": "1.0.0",
   "scripts": {
-    "start-lite": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
-    "start": "webpack-dev-server --inline --progress --port 8080",
+    "rimraf": "rimraf",
+    "tslint": "tslint",
+    "typedoc": "typedoc",
+    "typings": "typings",
+    "webpack": "webpack",
+    "webpack-dev-server": "webpack-dev-server",
+    "webdriver-manager": "webdriver-manager",
+
+    "clean": "npm cache clean && npm run rimraf -- node_modules doc typings coverage dist",
+      "clean:dist": "npm run rimraf -- dist",
+        "preclean:install": "npm run clean",
+      "clean:install": "npm set progress=false && npm install",
+        "preclean:start": "npm run clean",
+      "clean:start": "npm start",
+
+    "watch": "npm run watch:dev",
+      "watch:dev": "npm run build:dev -- --watch",
+      "watch:dev:hmr": "npm run watch:dev -- --hot",
+      "watch:test": "npm run test -- --auto-watch --no-single-run",
+      "watch:prod": "npm run build:prod -- --watch",
+
+    "build": "npm run build:dev",
+      "prebuild:dev": "npm run clean:dist",
+      "build:dev": "webpack --config config/webpack.dev.js --progress --profile --colors --display-error-details --display-cached",
+      "prebuild:prod": "npm run clean:dist",
+      "build:prod": "webpack --config config/webpack.prod.js  --progress --profile --colors --display-error-details --display-cached --bail",
+
+    "server": "npm run server:dev",
+      "server:dev": "webpack-dev-server --config config/webpack.dev.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
+      "server:dev:hmr": "npm run server:dev -- --hot",
+      "server:prod": "http-server dist --cors",
+
+    "webdriver:update": "npm run webdriver-manager update",
+    "webdriver:start": "npm run webdriver-manager start",
+
+    "lint": "npm run tslint src/**/*.ts",
+
     "docker-build": "docker build -t ng2-quickstart .",
     "docker": "npm run docker-build && docker run -it --rm -p 3000:3000 -p 3001:3001 ng2-quickstart",
     "e2e": "tsc && concurrently \"http-server\" \"protractor protractor.config.js\"",
-    "lint": "tslint ./app/**/*.ts -t verbose",
-    "lite": "lite-server",
     "test": "tsc && concurrently \"tsc -w\" \"karma start karma.conf.js\"",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "typings": "typings",
-    "postinstall": "typings install",
-    "webdriver:update": "webdriver-manager update",
-    "watch": "webpack --watch"
+
+    "docs": "npm run typedoc -- --options typedoc.json --exclude '**/*.spec.ts' ./src/",
+
+    "start": "npm run server:dev",
+    "start:hmr": "npm run server:dev:hmr",
+
+    "postinstall": "npm run typings -- install"
   },
   "license": "ISC",
   "dependencies": {
@@ -29,7 +63,7 @@
     "@angular/router-deprecated": "2.0.0-rc.1",
     "@angular/upgrade": "2.0.0-rc.1",
     "@ngrx/store": "^2.0.0",
-    "angular2-in-memory-web-api": "0.0.10",
+    "angular2-in-memory-web-api": "0.0.11",
     "bootstrap": "^3.3.6",
     "core-js": "^2.4.0",
     "es6-shim": "^0.35.0",
