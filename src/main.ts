@@ -1,17 +1,17 @@
 'use strict'
 import { provide } from '@angular/core'
 import { InMemoryBackendService, InMemoryBackendConfig, SEED_DATA } from 'angular2-in-memory-web-api'
-import { InMemoryDataService } from './services/in-memory-data.service'
+import { InMemoryDataService } from './app/services/in-memory-data.service'
 import { provideStore } from '@ngrx/store'
 
 import { bootstrap } from '@angular/platform-browser-dynamic'
 import { XHRBackend, HTTP_PROVIDERS } from '@angular/http'
 
-import { AppComponent } from './components/index'
-import { heroes } from './reducers'
-import { HttpJson } from './services'
-import { HeroApi } from './services'
-import { HeroActions } from './actions'
+import { AppComponent } from './app/components/index'
+import { heroes } from './app/reducers'
+import { HttpJson } from './app/services'
+import { HeroApi } from './app/services'
+import { HeroActions } from './app/actions'
 
 
 bootstrap(AppComponent, [
