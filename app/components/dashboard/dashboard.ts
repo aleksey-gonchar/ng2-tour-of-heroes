@@ -1,14 +1,10 @@
 'use strict'
 import { OnInit, Component } from '@angular/core'
 import { Router } from '@angular/router-deprecated'
-import { Observer, Observable, Subject } from 'rxjs'
-import { Store } from '@ngrx/store'
-
+import { Observable } from 'rxjs'
 
 import { Hero } from '../../interfaces'
-// import { HeroService } from '../../services/hero.service'
 import { HeroActions } from '../../actions/hero.actions'
-import { HeroesState } from '../../reducers/heroes.reducer'
 
 @Component({
   moduleId: module.id,
@@ -21,24 +17,15 @@ export class DashboardComponent implements OnInit{
 
   constructor(
     private router: Router,
-    // private heroService: HeroService,
-    private heroActions: HeroActions,
-    public store: Store<HeroesState>
+    private heroActions: HeroActions
   ) {
     console.log('DashboardComponent.constructor()')
-    // this.heroService.heroes$.take(3).subscribe(payload => {
-      // this.heroes$.next(payload.slice(1,5))
-      // console.dir(payload)
-      // this.heroes$.next(payload)
-    // })
-    // heroActions.loadAll()
-    this.heroes$ = this.store.select('heroes')
+    this.heroes$ = this.heroActions.heroes$
   }
 
   ngOnInit () {
     console.log('DashboardComponent.ngOnInit()')
-    // this.heroService.getHeroes()
-  //     .then(heroes => this.heroes = heroes.slice(1,5))
+    this.heroActions.loadAll()
   }
 
   gotoDetail (hero: Hero) {

@@ -4,7 +4,6 @@ import { Router } from '@angular/router-deprecated'
 
 import { Hero } from '../../interfaces'
 import { HeroDetailComponent } from '../hero-detail/hero-detail'
-import { HeroService } from '../../services/hero.service'
 
 @Component({
   moduleId: module.id,
@@ -20,7 +19,6 @@ export class HeroesComponent implements OnInit {
   error: any = null
 
   constructor(
-    private heroService: HeroService,
     private router: Router
   ) {}
 
@@ -29,8 +27,8 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes () {
-    this.heroService.getHeroes()
-      .then(heroes => this.heroes = heroes)
+    // this.heroService.getHeroes()
+    //   .then(heroes => this.heroes = heroes)
   }
 
   onSelect (hero: Hero) {
@@ -51,18 +49,18 @@ export class HeroesComponent implements OnInit {
   }
 
   close (savedHero: Hero) {
-    this.addingHero = false
-    if (savedHero) { this.getHeroes() }
+    // this.addingHero = false
+    // if (savedHero) { this.getHeroes() }
   }
 
   deleteHero (hero: Hero, event: any) {
     event.stopPropagation()
-    this.heroService
-      .delete(hero)
-      .then(res => {
-        this.heroes = this.heroes.filter(h => h !== hero)
-        if (this.selectedHero == hero) { this.selectedHero = null }
-      })
-      .catch(err => this.error = err)
+    // this.heroService
+    //   .delete(hero)
+    //   .then(res => {
+    //     this.heroes = this.heroes.filter(h => h !== hero)
+    //     if (this.selectedHero == hero) { this.selectedHero = null }
+    //   })
+    //   .catch(err => this.error = err)
   }
 }

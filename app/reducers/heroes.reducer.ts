@@ -6,6 +6,7 @@ import { Hero } from '../interfaces'
 export let HEROES_ACTION_TYPES = {
   CREATE: 'CREATE_HERO',
   DELETE: 'DELETE_HERO',
+  UPDATE: 'UPDATE_HERO',
   GET_ALL: 'GET_ALL_HEROES',
   GET: 'GET_HERO',
 }

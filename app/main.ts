@@ -7,10 +7,10 @@ import { provideStore } from '@ngrx/store'
 import { bootstrap } from '@angular/platform-browser-dynamic'
 import { XHRBackend, HTTP_PROVIDERS } from '@angular/http'
 
-import { AppComponent } from './components/app/app'
+import { AppComponent } from './components/index'
 import { heroes } from './reducers'
-import { HttpJson } from './services/http-json.service'
-import { HeroApi } from './services/hero-api.service'
+import { HttpJson } from './services'
+import { HeroApi } from './services'
 import { HeroActions } from './actions'
 
 

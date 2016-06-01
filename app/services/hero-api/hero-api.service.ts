@@ -2,9 +2,9 @@
 
 import { Injectable } from '@angular/core'
 
-import { Hero } from '../interfaces'
-import { LoopbackApi } from './loopback-api.service'
-import { HttpJson } from './http-json.service'
+import { Hero } from '../../interfaces'
+import { LoopbackApi } from '../loopback-api'
+import { HttpJson } from '../http-json'
 
 @Injectable()
 export class HeroApi extends LoopbackApi<Hero> {

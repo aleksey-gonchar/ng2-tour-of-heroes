@@ -3,7 +3,6 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
 import { RouteParams } from '@angular/router-deprecated'
 
 import { Hero } from '../../interfaces'
-import { HeroService } from '../../services/hero.service'
 
 @Component({
   moduleId: module.id,
@@ -19,7 +18,6 @@ export class HeroDetailComponent implements OnInit {
   error: any = null
 
   constructor (
-    private heroService: HeroService,
     private routeParams: RouteParams
   ) {
     console.log('HeroDetailComponent.constructor()')
@@ -39,13 +37,13 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save () {
-    this.heroService
-      .save(this.hero)
-      .then(hero => {
-        this.hero = hero
-        this.goBack(hero)
-      })
-      .catch(err => this.error= err)
+    // this.heroService
+    //   .save(this.hero)
+    //   .then(hero => {
+    //     this.hero = hero
+    //     this.goBack(hero)
+    //   })
+    //   .catch(err => this.error= err)
   }
 
   goBack (savedHero: Hero = null) {
