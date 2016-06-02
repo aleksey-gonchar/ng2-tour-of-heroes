@@ -7,6 +7,8 @@ import { DashboardComponent } from '../dashboard/dashboard'
 import { HeroDetailComponent } from '../hero-detail/hero-detail'
 import { HeroActions } from '../../actions/hero.actions'
 
+const style = require('./app.scss')
+
 @RouteConfig([
   {
     path: '/dashboard',
@@ -28,8 +30,8 @@ import { HeroActions } from '../../actions/hero.actions'
 @Component({
   moduleId: module.id,
   selector: 'my-app',
-  templateUrl: 'app.html',
-  styleUrls: ['app.css'],
+  template: require('./app.html'),
+  styles: [ require('./app.scss') ],
   directives: [
     ROUTER_DIRECTIVES
   ],

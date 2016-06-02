@@ -8,8 +8,8 @@ import { HeroDetailComponent } from '../hero-detail/hero-detail'
 @Component({
   moduleId: module.id,
   selector: 'my-heroes',
-  templateUrl: 'heroes.html',
-  styleUrls: ['heroes.css'],
+  template: require('./heroes.html'),
+  styles: [ require('./heroes.scss') ],
   directives: [HeroDetailComponent]
 })
 export class HeroesComponent implements OnInit {

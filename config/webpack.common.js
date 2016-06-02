@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const helpers = require('./helpers')
 
+const autoprefixer = require('autoprefixer')
 var CopyWebpackPlugin = (CopyWebpackPlugin = require('copy-webpack-plugin'), CopyWebpackPlugin.default || CopyWebpackPlugin);
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -63,17 +64,17 @@ module.exports = {
        */
       {
         test: /\.ts$/,
-        loader: 'awesome-typescript-loader',
+        loader: 'awesome-typescript',
         exclude: [/\.(spec|e2e)\.ts$/]
 
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        loader: 'json'
       },
       {
         test: /\.html$/,
-        loader: 'raw-loader',
+        loader: 'raw',
         exclude: [helpers.root('src/index.html')]
       },
       {
@@ -82,33 +83,19 @@ module.exports = {
       },
       {
         test: /\.scss/,
-        loader: 'style!css?sourceMap!sass?sourceMap'
+        loader: 'raw!postcss?sourceMap!sass?sourceMap',
+        include: helpers.root('src/app/components')
+      },
+      {
+        test: /main\.scss/,
+        loader: 'style!css!postcss!sass',
       },
       {
         test: /\.css/,
-        loader: 'style!css?sourceMap!cssnext'
+        loader: 'style!css!postcss'
       },
 
-      // {
-      //   test: /\.css$/,
-      //   exclude: helpers.root('src', 'app'),
-      //   loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
-      // },
-      // {
-      //   test: /\.css$/,
-      //   include: helpers.root('src', 'app'),
-      //   loader: 'raw'
-      // }
-    ],
-    // noParse: [
-    //   /zone\.js\/dist\/zone-microtask\.js/,
-    //   /zone\.js\/dist\/long-stack-trace-zone\.js/,
-    //   /zone\.js\/dist\/jasmine-patch\.js/,
-    //   /es6-shim/,
-    //   /reflect-metadata/,
-    //   /web-animations/,
-    //   /.+angular2\/bundles\/.+/
-    // ]
+    ]
   },
 
   plugins: [
@@ -130,7 +117,17 @@ module.exports = {
     clearImmediate: false,
     setImmediate: false
   },
-  cssnext: {
-    browsers: 'last 2 versions'
+  // cssnext: {
+  //   browsers: 'last 2 versions'
+  // },
+
+  postcss: [
+    autoprefixer({ browsers: ['last 3 versions'] })
+  ],
+
+  sassLoader: {
+    outputStyle: 'compressed',
+    precision: 10,
+    sourceComments: false
   }
 }

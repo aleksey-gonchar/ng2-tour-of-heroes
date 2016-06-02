@@ -7,8 +7,8 @@ import { Hero } from '../../interfaces'
 @Component({
   moduleId: module.id,
   selector: 'my-hero-detail',
-  templateUrl: 'hero-detail.html',
-  styleUrls: ['hero-detail.css']
+  template: require('./hero-detail.html'),
+  styles: [ require('./hero-detail.scss') ]
 })
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero

@@ -9,8 +9,8 @@ import { HeroActions } from '../../actions/hero.actions'
 @Component({
   moduleId: module.id,
   selector: 'my-dashboard',
-  templateUrl: 'dashboard.html',
-  styleUrls: ['dashboard.css']
+  template: require('./dashboard.html'),
+  styles: [ require('./dashboard.scss') ]
 })
 export class DashboardComponent implements OnInit{
   heroes$: Observable<Hero[]>
