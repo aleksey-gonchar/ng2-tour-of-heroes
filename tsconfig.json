@@ -21,5 +21,9 @@
     "!./node_modules/**",
     "./src/custom-typings.d.ts",
     "./typings/index.d.ts"
-  ]
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "resolveGlobs": true,
+    "forkChecker": true
+  }
 }

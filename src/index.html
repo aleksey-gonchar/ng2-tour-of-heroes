@@ -1,6 +1,7 @@
 <html>
 <head>
-  <title><%= webpackConfig.metadata.title %></title>
+  <!--<title><%= webpackConfig.metadata.title %></title>-->
+  <title><%= htmlWebpackPlugin.options.title %></title>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,6 +17,8 @@
 
 <% if (webpackConfig.metadata.ENV === 'development') { %>
   <script src="/webpack-dev-server.js"></script>
+<% } else { %>
+108
 <% } %>
 
 </body>
