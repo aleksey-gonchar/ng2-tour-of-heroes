@@ -6,6 +6,7 @@ const commonConfig = require('./webpack.common.js')
 const DefinePlugin = require('webpack/lib/DefinePlugin')
 
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development'
+
 const HMR = helpers.hasProcessFlag('hot')
 const METADATA = webpackMerge(commonConfig.metadata, {
   host: 'localhost',

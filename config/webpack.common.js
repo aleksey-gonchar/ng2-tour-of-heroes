@@ -16,16 +16,15 @@ module.exports = {
   // target: 'web',
   cache: true,
   entry: {
-    'polyfills': './src/polyfills.ts',
     'vendor': './src/vendor.ts',
+    'polyfills': './src/polyfills.ts',
     'app': './src/main.ts'
   },
 
   resolve: {
-    // extensions: ['', '.js', '.ts'],
-    extensions: ['', '.ts', '.js'],
+    extensions: ['', '.ts', '.js', '.scss'],
     root: helpers.root('src'),
-    modulesDirectories: ['node_modules'],
+    modulesDirectories: ['node_modules', 'src'],
     alias: {
       // legacy imports pre-rc releases
       'angular2': helpers.root('node_modules/@angularclass/angular2-beta-to-rc-alias/dist/beta-17')
@@ -48,20 +47,15 @@ module.exports = {
         exclude: [
           helpers.root('node_modules/rxjs'),
           helpers.root('node_modules/@angular'),
+          helpers.root('node_modules/@ngrx')
         ]
-      }
+      },
+      // {
+      //   test: /\.scss/,
+      //   loader: 'import-glob-loader'
+      // }
     ],
     loaders: [
-      // {
-      //   test: /\.ts$/,
-      //   loader: 'ts',
-      //   include: [/node_modules/],
-      //   query: {
-      //     instance: 'node_modules',
-      //     ignoreDiagnostics: [2339]
-      //   }
-      // },
-
       /*
        * Typescript loader support for .ts and Angular 2 async routes via .async.ts
        *
@@ -82,24 +76,29 @@ module.exports = {
         loader: 'raw-loader',
         exclude: [helpers.root('src/index.html')]
       },
-      // {
-      //   test: /\.html$/,
-      //   loader: 'html'
-      // },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
         loader: 'file?name=assets/[name].[hash].[ext]'
       },
       {
-        test: /\.css$/,
-        exclude: helpers.root('src', 'app'),
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+        test: /\.scss/,
+        loader: 'style!css?sourceMap!sass?sourceMap'
       },
       {
-        test: /\.css$/,
-        include: helpers.root('src', 'app'),
-        loader: 'raw'
-      }
+        test: /\.css/,
+        loader: 'style!css?sourceMap!cssnext'
+      },
+
+      // {
+      //   test: /\.css$/,
+      //   exclude: helpers.root('src', 'app'),
+      //   loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+      // },
+      // {
+      //   test: /\.css$/,
+      //   include: helpers.root('src', 'app'),
+      //   loader: 'raw'
+      // }
     ],
     // noParse: [
     //   /zone\.js\/dist\/zone-microtask\.js/,
@@ -115,23 +114,13 @@ module.exports = {
   plugins: [
     new ForkCheckerPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: ['polyfills', 'vendor'].reverse()
-    // }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'polyfills'].reverse()
+      name: ['vendor', 'polyfills']
     }),
 
-    new CopyWebpackPlugin([{
-      from: 'src/styles.css',
-      to: 'styles.css'
-    }]),
-
     new HtmlWebpackPlugin({
-      title: '108',
       template: 'src/index.html',
-      chunksSortMode: 'dependency',
-      // inject: 'body'
+      chunksSortMode: 'dependency'
     })
   ],
   node: {
@@ -140,5 +129,8 @@ module.exports = {
     module: false,
     clearImmediate: false,
     setImmediate: false
+  },
+  cssnext: {
+    browsers: 'last 2 versions'
   }
 }

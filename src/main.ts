@@ -13,6 +13,7 @@ import { HttpJson } from './app/services'
 import { HeroApi } from './app/services'
 import { HeroActions } from './app/actions'
 
+import './main.scss'
 
 bootstrap(AppComponent, [
   HTTP_PROVIDERS,
