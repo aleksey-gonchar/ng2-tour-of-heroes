@@ -7,8 +7,6 @@ import { DashboardComponent } from '../dashboard/dashboard'
 import { HeroDetailComponent } from '../hero-detail/hero-detail'
 import { HeroActions } from '../../actions/hero.actions'
 
-const style = require('./app.scss')
-
 @RouteConfig([
   {
     path: '/dashboard',

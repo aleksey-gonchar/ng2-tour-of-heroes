@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs'
 
 import { AppStore, Hero } from '../interfaces'
 import { HEROES_ACTION_TYPES } from '../reducers'
-import { HeroApi } from '../services/hero-api/hero-api.service.ts'
+import { HeroApi } from '../services/hero-api'
 
 @Injectable()
 export class HeroActions {
@@ -56,7 +56,7 @@ export class HeroActions {
       }))
   }
 
-  loadAll () {
+  getAll () {
     return this.heroApi.getAll()
       .subscribe(heroes => this.actions$.next({
         type: HEROES_ACTION_TYPES.GET_ALL,
