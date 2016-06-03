@@ -5,5 +5,7 @@ npm-debug.log
 .DS_Store
 .idea
 config/secrets.*
-*.js
-*.js.map
+/src/**/*.js
+/src/**/*.js.map
+/dist/**/*
+/typings/**
