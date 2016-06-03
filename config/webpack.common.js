@@ -4,7 +4,6 @@ const helpers = require('./helpers')
 const autoprefixer = require('autoprefixer')
 var CopyWebpackPlugin = (CopyWebpackPlugin = require('copy-webpack-plugin'), CopyWebpackPlugin.default || CopyWebpackPlugin);
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin
 
 const METADATA = {
@@ -33,7 +32,6 @@ module.exports = {
   },
 
   module: {
-
     preLoaders: [
       /*
        * Tslint loader support for *.ts files
@@ -50,23 +48,14 @@ module.exports = {
           helpers.root('node_modules/@angular'),
           helpers.root('node_modules/@ngrx')
         ]
-      },
-      // {
-      //   test: /\.scss/,
-      //   loader: 'import-glob-loader'
-      // }
+      }
     ],
     loaders: [
-      /*
-       * Typescript loader support for .ts and Angular 2 async routes via .async.ts
-       *
-       * See: https://github.com/s-panferov/awesome-typescript-loader
-       */
       {
         test: /\.ts$/,
         loader: 'awesome-typescript',
         exclude: [/\.(spec|e2e)\.ts$/]
-
+        
       },
       {
         test: /\.json$/,
@@ -93,8 +82,7 @@ module.exports = {
       {
         test: /\.css/,
         loader: 'style!css!postcss'
-      },
-
+      }
     ]
   },
 
@@ -110,6 +98,7 @@ module.exports = {
       chunksSortMode: 'dependency'
     })
   ],
+
   node: {
     global: 'window',
     crypto: 'empty',
