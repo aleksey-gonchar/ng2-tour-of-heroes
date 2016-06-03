@@ -1,6 +1,6 @@
 'use strict'
-import {it, inject, beforeEachProviders} from '@angular/core/testing'
-import {LoopbackApi} from './loopback-api.service.ts'
+import { it, inject, beforeEachProviders } from '@angular/core/testing'
+import { LoopbackApi } from './loopback-api.service.ts'
 
 interface Dummy {
   id?:string
