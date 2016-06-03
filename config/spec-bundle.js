@@ -23,7 +23,9 @@ testing.setBaseTestProviders(
 
 Object.assign(global, testing)
 
-var testContext = require.context('../src', true, /\.spec\.js$/)
+global.faker = require('faker')
+
+var testContext = require.context('../src', true, /\.spec\.ts$/)
 
 function requireAll(requireContext) {
   return requireContext.keys().map(requireContext)

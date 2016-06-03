@@ -55,7 +55,7 @@ module.exports = {
         test: /\.ts$/,
         loader: 'awesome-typescript',
         exclude: [/\.(spec|e2e)\.ts$/]
-        
+
       },
       {
         test: /\.json$/,
@@ -98,7 +98,6 @@ module.exports = {
       chunksSortMode: 'dependency'
     })
   ],
-
   node: {
     global: 'window',
     crypto: 'empty',
@@ -106,14 +105,9 @@ module.exports = {
     clearImmediate: false,
     setImmediate: false
   },
-  // cssnext: {
-  //   browsers: 'last 2 versions'
-  // },
-
   postcss: [
     autoprefixer({ browsers: ['last 3 versions'] })
   ],
-
   sassLoader: {
     outputStyle: 'compressed',
     precision: 10,

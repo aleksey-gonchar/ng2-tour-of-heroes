@@ -5,14 +5,9 @@ module.exports = (config) => {
 
   config.set({
     basePath: '',
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'sinon', 'faker'],
     exclude: [ ],
-    /*
-     * list of files / patterns to load in the browser
-     * we are building the test environment in ./spec-bundle.js
-     */
     files: [ { pattern: './config/spec-bundle.js', watched: false } ],
-    // preprocessors: { './config/spec-bundle.js': ['coverage', 'webpack', 'sourcemap'] },
     preprocessors: { './config/spec-bundle.js': ['webpack'] },
     webpack: testWebpackConfig,
     coverageReporter: {
@@ -34,5 +29,6 @@ module.exports = (config) => {
       'PhantomJS'
     ],
     singleRun: true
+    // singleRun: false
   })
 }

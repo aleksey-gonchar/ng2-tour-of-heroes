@@ -1,5 +1,8 @@
+'use strict'
+
 const helpers = require('./helpers')
 
+const autoprefixer = require('autoprefixer')
 const ProvidePlugin = require('webpack/lib/ProvidePlugin')
 const DefinePlugin = require('webpack/lib/DefinePlugin')
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin
@@ -7,11 +10,11 @@ const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin
 const ENV = process.env.ENV = process.env.NODE_ENV = 'test'
 
 module.exports = {
-  // devtool: 'inline-source-map',
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   resolve: {
     extensions: ['', '.ts', '.js'],
     root: helpers.root('src'),
+    modulesDirectories: ['node_modules', 'src'],
   },
 
   module: {
@@ -31,24 +34,8 @@ module.exports = {
           helpers.root('node_modules/@ngrx')
         ]
       },
-      // {
-      //   test: /\.js$/,
-      //   loader: 'babel-istanbul',
-      //   query: {
-      //     cacheDirectory: true
-      //   }
-      // }
     ],
     loaders: [
-      // {
-      //   test: /\.js$/,
-      //   include: helpers.root('src'),
-      //   loader: 'babel',
-      //   query: {
-      //     cacheDirectory: true,
-      //     presets: ['es2015']
-      //   }
-      // },
       {
         test: /\.ts$/,
         loader: 'awesome-typescript',
@@ -57,7 +44,7 @@ module.exports = {
             removeComments: true
           }
         },
-        exclude: [/\.(spec|e2e)\.ts$/]
+        exclude: [/\.e2e\.ts$/]
       },
       {
         test: /\.json$/,
@@ -91,7 +78,7 @@ module.exports = {
         test: /\.(js|ts)$/, loader: 'istanbul-instrumenter',
         include: helpers.root('src'),
         exclude: [
-          /\.(e2e|spec)\.ts$/,
+          /\.spec\.ts$/,
           /node_modules/
         ]
       }
@@ -122,5 +109,13 @@ module.exports = {
     module: false,
     clearImmediate: false,
     setImmediate: false
+  },
+  postcss: [
+    autoprefixer({ browsers: ['last 3 versions'] })
+  ],
+  sassLoader: {
+    outputStyle: 'compressed',
+    precision: 10,
+    sourceComments: false
   }
 }
