@@ -27,13 +27,13 @@ export class LoopbackApi<T extends PersistedModel> {
     })
   }
 
-  delete(entity: T): Observable<T> {
+  delete(entity: T): Observable<any> {
     return this.httpJson.executeDelete({
       url: `${BASE_URL}/${this.endpoint}/${entity.id}`
     }).map(res => entity)
   }
 
-  update(entity: T): Observable<T> {
+  update(entity: T): Observable<any> {
     return this.httpJson.executePut({
       url: `${BASE_URL}/${this.endpoint}/${entity.id}`
     }).map(res => entity)

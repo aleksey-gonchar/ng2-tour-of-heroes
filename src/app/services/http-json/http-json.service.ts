@@ -9,14 +9,14 @@ const HEADERS = new Headers({
 
 @Injectable()
 export class HttpJson {
-  constructor(private http:Http) {}
+  constructor(private http: Http) {}
 
   executePut(options: any): Observable<any> {
     options.method = RequestMethod.Put
     return this.execute(options)
   }
 
-  executeGet(options: any):Observable<any> {
+  executeGet(options: any): Observable<any> {
     options.method = RequestMethod.Get
     return this.execute(options)
   }

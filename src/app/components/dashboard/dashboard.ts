@@ -12,7 +12,7 @@ import { HeroActions } from '../../actions/hero.actions'
   template: require('./dashboard.html'),
   styles: [ require('./dashboard.scss') ]
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
   heroes$: Observable<Hero[]>
 
   constructor(
