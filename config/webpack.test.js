@@ -19,11 +19,11 @@ module.exports = {
 
   module: {
     preLoaders: [
-      // {
-      //   test: /\.ts$/,
-      //   loader: 'tslint-loader',
-      //   exclude: [helpers.root('node_modules')]
-      // },
+      {
+        test: /\.ts$/,
+        loader: 'tslint-loader',
+        exclude: [helpers.root('node_modules')]
+      },
       {
         test: /\.js$/,
         loader: 'source-map',
@@ -78,7 +78,7 @@ module.exports = {
         test: /\.(js|ts)$/, loader: 'istanbul-instrumenter',
         include: helpers.root('src'),
         exclude: [
-          /\.spec\.ts$/,
+          /\.(e2e|spec)\.ts$/,
           /node_modules/
         ]
       }
