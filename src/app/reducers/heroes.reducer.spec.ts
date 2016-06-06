@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@angular/core/testing'
 const deepFreeze = require('deep-freeze')
 
-import { heroes, HEROES_ACTION_TYPES, HEROES_INITIAL_STATE } from './heroes'
+import { heroes, HEROES_ACTION_TYPES, HEROES_INITIAL_STATE } from './heroes.reducer'
 
 import { heroesMockJson } from '../seeds'
 

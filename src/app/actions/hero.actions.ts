@@ -12,8 +12,8 @@ export class HeroActions {
   heroes$: Observable<Hero[]>
 
   private actions$: BehaviorSubject<Action> = new BehaviorSubject({
-    type: null,
-    payload: null
+    type: undefined,
+    payload: undefined
   })
 
   constructor(
