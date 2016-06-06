@@ -8,7 +8,7 @@ export let HEROES_ACTION_TYPES = {
   DELETE: 'DELETE_HERO',
   UPDATE: 'UPDATE_HERO',
   GET_ALL: 'GET_ALL_HEROES',
-  GET: 'GET_HERO',
+  GET: 'GET_HERO'
 }
 
 export let HEROES_INITIAL_STATE = []
@@ -26,5 +26,8 @@ export const heroes = (state: Array<Hero> = HEROES_INITIAL_STATE, action: Action
 
     case HEROES_ACTION_TYPES.GET:
       return action.payload
+
+    default:
+      return [...state]
   }
 }

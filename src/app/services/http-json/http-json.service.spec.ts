@@ -7,7 +7,7 @@ import { Observable } from 'rxjs'
 
 import { HttpJson } from './http-json.service'
 
-import { heroesMockJson } from '../../mocks'
+import { heroesMockJson } from '../../seeds'
 
 let service: HttpJson
 let http: Http

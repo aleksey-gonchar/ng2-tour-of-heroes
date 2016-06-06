@@ -112,6 +112,7 @@
 
     "protractor": "3.2.2",
 
+    "deep-freeze": "0.0.1",
     "parse5": "1.5.1",
     "phantomjs-polyfill": "0.0.2",
     "phantomjs-prebuilt": "2.1.7",

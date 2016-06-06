@@ -10,7 +10,7 @@ import { HttpJson } from '../http-json'
 import { HeroApi } from './hero-api.service'
 import { Observable } from 'rxjs'
 
-import { heroesMockJson } from '../../mocks'
+import { heroesMockJson } from '../../seeds'
 
 let mockResults = {
   all: heroesMockJson,
