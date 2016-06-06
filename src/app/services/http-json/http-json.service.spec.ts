@@ -7,6 +7,8 @@ import { Observable } from 'rxjs'
 
 import { HttpJson } from './http-json.service'
 
+import { heroesMockJson } from '../../mocks'
+
 let service: HttpJson
 let http: Http
 let mockOptions = {
@@ -16,7 +18,7 @@ let mockOptions = {
     'Accept': 'application/json'
   }),
   response: {
-    result: { 'id': 11, 'name': 'Mr. Nice' }
+    result: heroesMockJson[0]
   }
 }
 

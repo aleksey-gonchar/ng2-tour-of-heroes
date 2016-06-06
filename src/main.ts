@@ -1,6 +1,10 @@
 'use strict'
 import { provide } from '@angular/core'
-import { InMemoryBackendService, InMemoryBackendConfig, SEED_DATA } from 'angular2-in-memory-web-api'
+import {
+  InMemoryBackendConfig,
+  InMemoryBackendService,
+  SEED_DATA
+} from 'angular2-in-memory-web-api'
 import { InMemoryDataService } from './app/services/in-memory-data.service'
 import { provideStore } from '@ngrx/store'
 
