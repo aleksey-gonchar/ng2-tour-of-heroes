@@ -1,4 +1,7 @@
-import { xdescribe, it, injectAsync, beforeEachProviders } from '@angular/core/testing'
+import {
+  fdescribe, xdescribe, it,
+  injectAsync, beforeEachProviders
+} from '@angular/core/testing'
 import { TestComponentBuilder } from '@angular/compiler/testing'
 import { Component } from '@angular/core'
 import { BehaviorSubject } from 'rxjs'
@@ -22,11 +25,23 @@ class HeroActionsMock {
   }
 }
 
-xdescribe('Component: DashboardComponent', () => {
+fdescribe('Component: DashboardComponent', () => {
+  let location
+  let router
+
   beforeEachProviders(() => [
-    provide(HeroActions, { useClass: HeroActionsMock })
+    RouteRegistry,
+    provide(Location, {useClass: SpyLocation}),
+    provide(HeroActions, { useClass: HeroActionsMock }),
+    provide(Router, {useClass: RootRouter}),
+    provide(ROUTER_PRIMARY_COMPONENT, {useValue: App})
   ])
 
+  beforeEach(inject([Router, Location], (r, l) => {
+    router = r
+    location = l
+  }))
+  
   it('should be defined', injectAsync([TestComponentBuilder], (tcb) => {
     return tcb.createAsync(DashboardComponent)
       .then((fixture) => {
@@ -43,4 +58,17 @@ xdescribe('Component: DashboardComponent', () => {
       })
   }))
 
+  it('Should be able to navigate to Dashboard', done => {
+    router.navigate(['dashboard']).then(() => {
+      expect(location.path()).toBe('/dashboard')
+      done()
+    }).catch(e => done.fail(e))
+  })
+
+  it('should redirect not registered urls to Dashboard', done => {
+    router.navigateByUrl('/unknown').then(() => {
+      expect(location.path()).toBe('/Dashboard')
+      done()
+    }).catch(e => done.fail(e))
+  })
 })

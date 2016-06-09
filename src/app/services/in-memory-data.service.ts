@@ -2,7 +2,7 @@
 
 export class InMemoryDataService {
   createDb () {
-    let heroes = require('../mocks/heroes')
+    let heroes = require('../seeds/heroes')
 
     return { heroes }
   }

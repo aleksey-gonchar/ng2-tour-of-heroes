@@ -1,27 +1,24 @@
 'use strict'
 import { Component } from '@angular/core'
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated'
+// import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated'
+import { Routes, ROUTER_DIRECTIVES } from '@angular/router'
 
 import { HeroesComponent } from '../heroes/heroes'
 import { DashboardComponent } from '../dashboard/dashboard'
 import { HeroDetailComponent } from '../hero-detail/hero-detail'
 import { HeroActions } from '../../actions/hero.actions'
 
-@RouteConfig([
+@Routes([
   {
     path: '/dashboard',
-    name: 'Dashboard',
-    component: DashboardComponent,
-    useAsDefault: true
+    component: DashboardComponent
   },
   {
     path: '/heroes',
-    name: 'Heroes',
     component: HeroesComponent
   },
   {
     path: '/detail/:id',
-    name: 'HeroDetail',
     component: HeroDetailComponent
   }
 ])
@@ -34,7 +31,6 @@ import { HeroActions } from '../../actions/hero.actions'
     ROUTER_DIRECTIVES
   ],
   providers: [
-    ROUTER_PROVIDERS,
     HeroActions
   ]
 })
