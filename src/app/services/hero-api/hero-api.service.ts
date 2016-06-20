@@ -7,7 +7,7 @@ import { HttpJson } from '../http-json'
 
 @Injectable()
 export class HeroApi extends LoopbackApi<Hero> {
-  constructor(httpJson:HttpJson) {
+  constructor(httpJson: HttpJson) {
     super()
     this.httpJson = httpJson
     this.endpoint = 'heroes'

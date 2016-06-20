@@ -9,3 +9,4 @@ config/secrets.*
 /src/**/*.js.map
 /dist/**/*
 /typings/**
+/coverage

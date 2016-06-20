@@ -9,29 +9,29 @@ const HEADERS = new Headers({
 
 @Injectable()
 export class HttpJson {
-  constructor(private http:Http) {}
+  constructor(private http: Http) {}
 
-  executePut(options:any):Observable<any> {
+  executePut(options: any): Observable<any> {
     options.method = RequestMethod.Put
     return this.execute(options)
   }
 
-  executeGet(options:any):Observable<any> {
+  executeGet(options: any): Observable<any> {
     options.method = RequestMethod.Get
     return this.execute(options)
   }
 
-  executePost(options:any):Observable<any> {
+  executePost(options: any): Observable<any> {
     options.method = RequestMethod.Post
     return this.execute(options)
   }
 
-  executeDelete(options:any):Observable<any> {
+  executeDelete(options: any): Observable<any> {
     options.method = RequestMethod.Delete
     return this.execute(options)
   }
 
-  private execute(options:any):Observable<any> {
+  private execute(options: any): Observable<any> {
     if (options.body) {
       if (typeof options.body !== 'string') {
         options.body = JSON.stringify(options.body)

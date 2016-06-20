@@ -16,7 +16,7 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[]
   selectedHero: Hero
   addingHero = false
-  error: any = null
+  error: any = undefined
 
   constructor(
     private router: Router
@@ -45,7 +45,7 @@ export class HeroesComponent implements OnInit {
 
   addHero () {
     this.addingHero = true
-    this.selectedHero = null
+    this.selectedHero = undefined
   }
 
   close (savedHero: Hero) {

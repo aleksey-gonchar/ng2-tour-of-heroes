@@ -1,61 +1,50 @@
-const webpack = require('webpack')
+'use strict'
+
 const helpers = require('./helpers')
 
 const autoprefixer = require('autoprefixer')
-var CopyWebpackPlugin = (CopyWebpackPlugin = require('copy-webpack-plugin'), CopyWebpackPlugin.default || CopyWebpackPlugin);
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ProvidePlugin = require('webpack/lib/ProvidePlugin')
+const DefinePlugin = require('webpack/lib/DefinePlugin')
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin
 
-const METADATA = {
-  title: 'Tour of heroes',
-  baseUrl: '/'
-}
+const ENV = process.env.ENV = process.env.NODE_ENV = 'test'
 
 module.exports = {
-  metadata: METADATA,
-  // target: 'web',
-  cache: true,
-  entry: {
-    'vendor': './src/vendor.ts',
-    'polyfills': './src/polyfills.ts',
-    'app': './src/main.ts'
-  },
-
+  devtool: 'inline-source-map',
   resolve: {
-    extensions: ['', '.ts', '.js', '.scss'],
+    extensions: ['', '.ts', '.js'],
     root: helpers.root('src'),
     modulesDirectories: ['node_modules', 'src'],
-    alias: {
-      // legacy imports pre-rc releases
-      'angular2': helpers.root('node_modules/@angularclass/angular2-beta-to-rc-alias/dist/beta-17')
-    }
   },
 
   module: {
     preLoaders: [
-      /*
-       * Tslint loader support for *.ts files
-       *
-       * See: https://github.com/wbuchwalter/tslint-loader
-       */
-      // { test: /\.ts$/, loader: 'tslint-loader', exclude: [ helpers.root('node_modules') ] },
-
+      {
+        test: /\.ts$/,
+        loader: 'tslint-loader',
+        exclude: [helpers.root('node_modules')]
+      },
       {
         test: /\.js$/,
-        loader: 'source-map-loader',
+        loader: 'source-map',
         exclude: [
+          // these packages have problems with their sourcemaps
           helpers.root('node_modules/rxjs'),
           helpers.root('node_modules/@angular'),
           helpers.root('node_modules/@ngrx')
         ]
-      }
+      },
     ],
     loaders: [
       {
         test: /\.ts$/,
         loader: 'awesome-typescript',
-        exclude: [/\.(spec|e2e)\.ts$/]
-
+        query: {
+          compilerOptions: {
+            removeComments: true
+          }
+        },
+        exclude: [/\.e2e\.ts$/]
       },
       {
         test: /\.json$/,
@@ -82,24 +71,40 @@ module.exports = {
       {
         test: /\.css/,
         loader: 'style!css!postcss'
+      },
+    ],
+    postLoaders: [
+      {
+        test: /\.(js|ts)$/, loader: 'istanbul-instrumenter',
+        include: helpers.root('src'),
+        exclude: [
+          /\.(e2e|spec)\.ts$/,
+          /node_modules/
+        ]
       }
     ]
   },
 
   plugins: [
     new ForkCheckerPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(true),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'polyfills']
+    new DefinePlugin({
+      'ENV': JSON.stringify(ENV),
+      'HMR': false,
+      'process.env': {
+        'ENV': JSON.stringify(ENV),
+        'NODE_ENV': JSON.stringify(ENV),
+        'HMR': false,
+      }
     }),
-
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      chunksSortMode: 'dependency'
-    })
   ],
+  tslint: {
+    emitErrors: false,
+    failOnHint: false,
+    resourcePath: 'src'
+  },
   node: {
     global: 'window',
+    process: false,
     crypto: 'empty',
     module: false,
     clearImmediate: false,

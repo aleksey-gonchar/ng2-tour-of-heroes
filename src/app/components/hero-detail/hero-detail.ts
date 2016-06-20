@@ -15,7 +15,7 @@ export class HeroDetailComponent implements OnInit {
   @Output() close = new EventEmitter()
 
   navigated = false
-  error: any = null
+  error: any = undefined
 
   constructor (
     private routeParams: RouteParams
@@ -46,7 +46,7 @@ export class HeroDetailComponent implements OnInit {
     //   .catch(err => this.error= err)
   }
 
-  goBack (savedHero: Hero = null) {
+  goBack (savedHero: Hero = undefined) {
     this.close.emit(savedHero)
     if (this.navigated) { window.history.back() }
   }
