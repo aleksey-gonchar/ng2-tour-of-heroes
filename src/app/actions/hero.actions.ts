@@ -58,9 +58,11 @@ export class HeroActions {
 
   getAll () {
     return this.heroApi.getAll()
-      .subscribe(heroes => this.actions$.next({
-        type: HEROES_ACTION_TYPES.GET_ALL,
-        payload: heroes
-      }))
+      .subscribe(heroes => {
+        this.actions$.next({
+          type: HEROES_ACTION_TYPES.GET_ALL,
+          payload: heroes
+        })
+      })
   }
 }
